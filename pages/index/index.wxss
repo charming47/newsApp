@@ -1,21 +1,39 @@
-/**index.wxss**/
-.userinfo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+page{ 
+  display: flex; 
+  flex-direction: column; 
+  height: 100%; 
+} 
 
-.userinfo-avatar {
-  width: 128rpx;
-  height: 128rpx;
-  margin: 20rpx;
-  border-radius: 50%;
-}
+.navbar{ 
+  flex: none; 
+  display: flex; 
+  background: #fff; 
+} 
 
-.userinfo-nickname {
-  color: #aaa;
-}
+.navbar .item{ 
+  position: relative; 
+  flex: auto; 
+  text-align: center; 
+  line-height: 80rpx; 
+  font-size:14px;
+} 
 
-.usermotto {
-  margin-top: 200px;
+/* 顶部导航字体颜色 */
+
+.navbar .item.active{ 
+  color: #f0145a; 
+} 
+
+
+/* 顶部指示条属性 */
+
+.navbar .item.active:after{ 
+  content: ""; 
+  display: block; 
+  position: absolute; 
+  bottom: 0; 
+  left: 0; 
+  right: 0; 
+  height: 6rpx; 
+  background: #f0145a; 
 }
