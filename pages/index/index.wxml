@@ -1,3 +1,18 @@
 <view class="navbar">
- <text wx:for="{{navbar}}" data-idx="{{index}}" class="item {{currentTab==index ? 'active' : ''}}" wx:key="unique" bindtap="navbarTap">{{item}}</text>
+ <text wx:for="{{navbar}}" data-idx="{{index}}" class="item {{currentTab==index ? 'active' : ''}}" bindtap="navbarTap">{{item}}</text>
 </view>
+  <scroll-view>
+  <view class="news-item" wx:for="{{newsList}}">
+    <view class="news-wrapper">
+      <view class="news-title">{{item.title}}</view>
+      <view class="news-info">
+        <view class="news-source">{{item.source}}</view>
+        <view class="news-time">{{item.date}}</view>
+      </view>
+    </view>
+    <image class="news-image" src="{{item.imagePath}}"></image>
+  </view>
+  </scroll-view>
+    
+
+    <!-- bindtap="onTapNewsDetail" plain="true" -->

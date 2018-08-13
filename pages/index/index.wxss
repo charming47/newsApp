@@ -5,9 +5,10 @@ page{
 } 
 
 .navbar{ 
-  flex: none; 
+  /* flex: none; */
   display: flex; 
   background: #fff; 
+  margin-bottom: 70rpx;
 } 
 
 .navbar .item{ 
@@ -21,13 +22,13 @@ page{
 /* 顶部导航字体颜色 */
 
 .navbar .item.active{ 
-  color: #f0145a; 
+  color: #CC0000; 
 } 
 
 
 /* 顶部指示条属性 */
 
-.navbar .item.active:after{ 
+.navbar .item.active::after{ 
   content: ""; 
   display: block; 
   position: absolute; 
@@ -35,5 +36,50 @@ page{
   left: 0; 
   right: 0; 
   height: 6rpx; 
-  background: #f0145a; 
+  background: #CC0000; 
 }
+
+
+.news-item {
+  display: flex;
+  position: relative;
+  align-items: center;
+  height: 180rpx;
+  margin: 0 30rpx;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+ .news-title{
+  opacity: 0.8;
+  font-size: 30rpx;
+  line-height: 42rpx;
+  font-weight: normal;
+  margin-right: 240rpx;
+  padding-top: 10rpx;
+  padding-bottom: 10rpx;
+}
+.news-info{
+  display: flex;
+}
+
+ .news-source{
+  opacity: 0.5;
+  font-size: 25rpx;
+  line-height: 35rpx;
+  padding-right: 40rpx;
+}
+
+ .news-time{
+  padding-right: 60rpx;
+  opacity: 0.5;
+  font-size: 25rpx;
+  line-height: 35rpx;
+}
+ .news-image{
+   position: absolute;
+   right: 0rpx;
+  max-width: 200rpx !important;
+  max-height: 130rpx;
+  /* padding-top: 10px; */
+} 
+
+/* 8.11 解决css布局知识，以及js的完善 */

@@ -4,9 +4,10 @@
     "pages/logs/logs"
   ],
   "window":{
-    "backgroundTextStyle":"light",
-    "navigationBarBackgroundColor": "#FF0000",
-    "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle":"white"
+    "backgroundTextStyle":"heavy",
+    "navigationBarBackgroundColor": "#CC0000",
+    "navigationBarTitleText": "快读·资讯",
+    "navigationBarTextStyle":"white",
+    "enablePullDownRefresh": true
   }
 }
