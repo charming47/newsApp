@@ -4,18 +4,24 @@ Page({
   data: {
     navbar: ["国内", "国际", "财经", "娱乐", "军事", "体育", "其他"],
     currentTab: 0,
-    imgUrls: [
-      'http:\/\/mz.djmall.xmisp.cn\/files\/banner\/20161219\/148211980641.png',
-      'http:\/\/mz.djmall.xmisp.cn\/files\/banner\/20161222\/148238831285.png',
-      'http:\/\/mz.djmall.xmisp.cn\/files\/banner\/20161222\/14823895573.png'
-    ],
     type: "gn",
-    newsList: []
+    newsList: [],
+    headlineTitle:"",
+    headlineSource:"",
+    headlineTime:"",
+    headlineImagePath:""
   },
 
   onLoad() {
     console.log('onLoad')
     this.getNews()
+  },
+
+  onPullDownRefresh() {
+    console.log('onPullDownRefresh')
+    this.getNews(() => {
+      wx.stopPullDownRefresh()
+    })
   },
 
   // 导航切换监听
@@ -26,7 +32,7 @@ Page({
     })
   },
 
-  getNews() {
+  getNews(callback) {
     console.log('getNews')
     wx.request({
       url: 'https://test-miniprogram.com/api/news/list',
@@ -35,9 +41,10 @@ Page({
       },
       success: res => {
         let result = res.data.result
-        console.log(result)
-        console.log(result.length)
         this.setNewsList(result)
+      },
+      complete: () => {
+        callback && callback()
       }
     })
   },
@@ -45,16 +52,24 @@ Page({
   setNewsList(result) {
     console.log('setNewsList')
     let newsList = []
-    for(let i = 0; i < result.length; i++){
+    for(let i = 1; i < result.length; i++){
         newsList.push({
           title: result[i].title,
-          source: (result[i].source === "") ? "快读原创" : result[i].source,
+          source: (result[i].source === "") ? "快读原创" : result[i].source,   //针对source为空的数据，默认为“快读原创”
           date: (result[i].date).substring(11,16),
           imagePath: result[i].firstImage
         })
     }
+    let headlineTitle=result[0].title
+    let headlineSource = (result[0].source === "") ? "快读原创" : result[0].source
+    let headlineTime=(result[0].date).substring(11,16)
+    let headlineImagePath=result[0].firstImage
     this.setData({
-      newsList: newsList
+      newsList: newsList,
+      headlineTitle: headlineTitle,
+      headlineSource: headlineSource,
+      headlineTime: headlineTime,
+      headlineImagePath: headlineImagePath
     })
   }
 })
