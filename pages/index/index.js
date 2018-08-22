@@ -91,7 +91,7 @@ Page({
 
   onTapNewsContent(){
     wx.navigateTo({
-      url: '/pages/content/content?+',
+      url: '/pages/content/content?=' + this.data.id,
     })
   }
 })
