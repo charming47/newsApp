@@ -1,18 +1,19 @@
 <view class="navigator">
 <view class="navbar">
- <text wx:for="{{navbar}}" data-idx="{{index}}" class="item {{currentTab==index ? 'active' : ''}}" bindtap="navbarTap">{{item}}</text>
+ <text wx:for="{{navbar}}" data-idx="{{index}}" class="item {{currentTab==index ? 'active' : ''}}" wx:key="unique" bindtap="navbarTap">{{item}}</text>
 </view>
 </view>
-<view class="headline-item">
+<!-- 点击标题才有效 -->
+<view class="headline-item" bindtap="onTapNewsContent">     
   <view class="headline-title">{{headlineTitle}}</view>
   <view class="headline-info">
     <view class="headline-source">{{headlineSource}}</view>
     <view class="headline-time">{{headlineTime}}</view>
   </view>
 </view>
-  <image class="headline-image" src="{{headlineImagePath}}"></image>
+  <image class="headline-image" src="{{headlineImagePath}}" ></image>
   <scroll-view>
-  <view class="news-item" wx:for="{{newsList}}">
+  <view class="news-item" wx:for="{{newsList}}" bindtap="onTapNewsContent">
     <view class="news-wrapper">
       <view class="news-title">{{item.title}}</view>
       <view class="news-info">

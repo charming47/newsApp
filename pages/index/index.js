@@ -1,5 +1,15 @@
 var app = getApp()
 
+const typesMap = {
+  '0': 'gn',
+  '1': 'gj',
+  '2': 'cj',
+  '3': 'yl',
+  '4': 'js',
+  '5': 'ty',
+  '6': 'other'
+}
+
 Page({
   data: {
     navbar: ["国内", "国际", "财经", "娱乐", "军事", "体育", "其他"],
@@ -24,23 +34,17 @@ Page({
     })
   },
 
-  // 导航切换监听
-  navbarTap: function (e) {
-    console.debug(e);
-    this.setData({
-      currentTab: e.currentTarget.dataset.idx
-    })
-  },
-
   getNews(callback) {
     console.log('getNews')
     wx.request({
       url: 'https://test-miniprogram.com/api/news/list',
       data: {
-        type: this.data.type
+        //currentTab: this.data.currentTab, //发现了吗，bindtap的currentTap数据并不作用于整个页面
+        type: this.data.type   //.typesMap[0]
       },
       success: res => {
         let result = res.data.result
+        console.log(result)
         this.setNewsList(result)
       },
       complete: () => {
@@ -48,6 +52,18 @@ Page({
       }
     })
   },
+
+  // 导航切换监听  还是无法点tab时自动刷新
+  navbarTap: function (e) {
+    var currentTab = e.currentTarget.dataset.idx
+    console.log(e)
+    this.setData({
+      currentTab: currentTab,
+      type: typesMap[currentTab]
+    })
+  },
+
+  
 
   setNewsList(result) {
     console.log('setNewsList')
@@ -70,6 +86,12 @@ Page({
       headlineSource: headlineSource,
       headlineTime: headlineTime,
       headlineImagePath: headlineImagePath
+    })
+  },
+
+  onTapNewsContent(){
+    wx.navigateTo({
+      url: '/pages/content/content?+',
     })
   }
 })
