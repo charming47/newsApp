@@ -4,7 +4,8 @@
 </view>
 </view>
 <!-- 点击标题才有效 -->
-<view class="headline-item" bindtap="onTapNewsContent">     
+
+<view class="headline-item" bindtap="onTapHeadlineContent">     
   <view class="headline-title">{{headlineTitle}}</view>
   <view class="headline-info">
     <view class="headline-source">{{headlineSource}}</view>
@@ -13,7 +14,7 @@
 </view>
   <image class="headline-image" src="{{headlineImagePath}}" ></image>
   <scroll-view>
-  <view class="news-item" wx:for="{{newsList}}" bindtap="onTapNewsContent">
+  <view class="news-item" wx:for="{{newsList}}" bindtap="onTapNewsContent" data-idx="{{index}}">
     <view class="news-wrapper">
       <view class="news-title">{{item.title}}</view>
       <view class="news-info">

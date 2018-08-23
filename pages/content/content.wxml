@@ -1,8 +1,11 @@
 <!--pages/content/content.wxml-->
-<view class="news-title">转发这个杨超越，保过</view>
+<view class="news-title">{{title}}</view>
 <view class="news-info">
-  <view class="news-source">春明日报</view>
-  <view class="news-time">8:30</view>
-  <view class="news-reading">阅读：1314</view>
+  <view class="news-source">{{source}}</view>
+  <view class="news-time">{{time}}</view>
+  <view class="news-reading">阅读量：{{readCount}}</view>
 </view>
-<view class="news-content">今天四六级出分了，不知道大家考得怎么样</view>
+<view class="news-content" wx:for="{{contentList}}">
+<view class="content-text">{{item.text}}</view>
+<image class="news-image" src="{{item.image}}"></image>
+</view>

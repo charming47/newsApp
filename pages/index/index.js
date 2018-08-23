@@ -19,7 +19,8 @@ Page({
     headlineTitle:"",
     headlineSource:"",
     headlineTime:"",
-    headlineImagePath:""
+    headlineImagePath:"",
+    headlineId: 0
   },
 
   onLoad() {
@@ -53,7 +54,7 @@ Page({
     })
   },
 
-  // 导航切换监听  还是无法点tab时自动刷新
+  // 导航切换监听  
   navbarTap: function (e) {
     var currentTab = e.currentTarget.dataset.idx
     console.log(e)
@@ -61,6 +62,7 @@ Page({
       currentTab: currentTab,
       type: typesMap[currentTab]
     })
+    this.getNews()
   },
 
   
@@ -73,25 +75,41 @@ Page({
           title: result[i].title,
           source: (result[i].source === "") ? "快读原创" : result[i].source,   //针对source为空的数据，默认为“快读原创”
           date: (result[i].date).substring(11,16),
-          imagePath: result[i].firstImage
+          imagePath: result[i].firstImage,
+          id: result[i].id
         })
     }
-    let headlineTitle=result[0].title
+    
+    let headlineTitle = result[0].title
     let headlineSource = (result[0].source === "") ? "快读原创" : result[0].source
-    let headlineTime=(result[0].date).substring(11,16)
-    let headlineImagePath=result[0].firstImage
+    let headlineTime = (result[0].date).substring(11,16)
+    let headlineImagePath = result[0].firstImage
+    let headlineId = result[0].id
     this.setData({
       newsList: newsList,
       headlineTitle: headlineTitle,
       headlineSource: headlineSource,
       headlineTime: headlineTime,
-      headlineImagePath: headlineImagePath
+      headlineImagePath: headlineImagePath,
+      headlineId: headlineId
     })
   },
 
-  onTapNewsContent(){
+  onTapNewsContent: function(e){
+    console.log('onTapNewsContent')
+    var index = e.currentTarget.dataset.idx 
+    var id = this.data.newsList[index].id
     wx.navigateTo({
-      url: '/pages/content/content?=' + this.data.id,
+      url: '/pages/content/content?id=' + id
+    })
+
+    console.log(id)
+  },
+
+  onTapHeadlineContent() {
+    console.log('onTapHeadlineContent')
+    wx.navigateTo({
+      url: '/pages/content/content?id=' + this.data.headlineId
     })
   }
 })

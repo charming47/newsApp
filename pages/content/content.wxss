@@ -28,4 +28,10 @@
   margin-top: 30rpx;
   margin-left: 30rpx;  
   margin-right: 30rpx;
+  font-size: 36rpx;
+  line-height: 52rpx;
+  opacity: 0.8
 }
+
+
+/* 还剩段落、图片的样式问题啦啦啦，以及头条封面标题优化布局、变色的问题*/
