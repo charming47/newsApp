@@ -21,6 +21,13 @@ Page({
     this.getContent()
   },
 
+  onPullDownRefresh() {
+    console.log('onPullDownRefresh')
+    this.getContent(() => {
+      wx.stopPullDownRefresh()
+    })
+  },
+
   getContent() {
     console.log('getContent')
     wx.request({
@@ -45,15 +52,24 @@ Page({
     let content = result.content
     let contentList = []
     for (let i = 0; i < content.length; i++) {
-      if (content[i].type === ('p' || 'strong')) {
+      if (content[i].type === 'p') {
         contentList.push({
           text: content[i].text
         })
       }
+      if (content[i].type === 'strong') {
+        contentList.push({
+          textStrong: content[i].text
+        })
+      }      
       if (content[i].type === 'image') {
         contentList.push({
           image: content[i].src
         })
+        i++;
+        contentList.push({
+          remark: content[i].text
+        })        
       }
     }
     this.setData({

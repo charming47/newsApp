@@ -6,6 +6,8 @@
   <view class="news-reading">阅读量：{{readCount}}</view>
 </view>
 <view class="news-content" wx:for="{{contentList}}">
+<view class="content-textStrong" wx:if="{{item.textStrong}}">{{item.textStrong}}</view>
 <view class="content-text">{{item.text}}</view>
-<image class="news-image" src="{{item.image}}"></image>
+<image class="news-image" wx:if="{{item.image}}" src="{{item.image}}"></image>
+<view class="image-remark" wx:if="{{item.remark}}">{{item.remark}}</view>
 </view>
