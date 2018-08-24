@@ -3,8 +3,8 @@
  <text wx:for="{{navbar}}" data-idx="{{index}}" class="item {{currentTab==index ? 'active' : ''}}" wx:key="unique" bindtap="navbarTap">{{item}}</text>
 </view>
 </view>
-<!-- 点击标题才有效 -->
 
+<!-- 点击标题才有效 -->
 <view class="headline-item" bindtap="onTapHeadlineContent">     
   <view class="headline-title">{{headlineTitle}}</view>
   <view class="headline-info">
@@ -25,6 +25,3 @@
     <image class="news-image" src="{{item.imagePath}}"></image>
   </view>
   </scroll-view>
-
-
-    <!-- bindtap="onTapNewsDetail" plain="true" -->

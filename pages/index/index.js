@@ -1,5 +1,5 @@
 var app = getApp()
-
+// 通过type来判断要渲染的新闻数据
 const typesMap = {
   '0': 'gn',
   '1': 'gj',
@@ -34,14 +34,13 @@ Page({
       wx.stopPullDownRefresh()
     })
   },
-
+// 获取新闻
   getNews(callback) {
     console.log('getNews')
     wx.request({
       url: 'https://test-miniprogram.com/api/news/list',
       data: {
-        //currentTab: this.data.currentTab, //发现了吗，bindtap的currentTap数据并不作用于整个页面
-        type: this.data.type   //.typesMap[0]
+        type: this.data.type
       },
       success: res => {
         let result = res.data.result
@@ -66,7 +65,7 @@ Page({
   },
 
   
-
+// 设置渲染的新闻列表数据
   setNewsList(result) {
     console.log('setNewsList')
     let newsList = []
@@ -95,6 +94,7 @@ Page({
     })
   },
 
+// 点击某条新闻，转入到新闻详情页，适用于头条下面的新闻列表
   onTapNewsContent: function(e){
     console.log('onTapNewsContent')
     var index = e.currentTarget.dataset.idx 
@@ -106,6 +106,7 @@ Page({
     console.log(id)
   },
 
+//点击头条新闻，转入到新闻详情页
   onTapHeadlineContent() {
     console.log('onTapHeadlineContent')
     wx.navigateTo({

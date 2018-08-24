@@ -46,7 +46,7 @@ page{
   background: #CC0000; 
 }
 
-
+/* 头条标题的位置（如‘财经’类）和颜色可以再优化，但不知如何解决 */
 .headline-item{
   display: flex;
   position: relative;
@@ -75,10 +75,6 @@ page{
 
 .headline-source{
   margin-right: 30rpx;
-}
-
-.headline-time{
-
 }
 
 .headline-image{
@@ -132,5 +128,3 @@ page{
   max-width: 200rpx !important;
   max-height: 130rpx;
 } 
-
-/* 学习一下如何自适应位置，就是头条标题与source、time的对应关系，应该可以用弹性盒子功能来搞定 */

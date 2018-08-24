@@ -43,6 +43,7 @@ Page({
     })
   },
 
+//设置新闻详情内容
   setContent(result) {
     console.log('setContent')
     let title = result.title
@@ -51,8 +52,8 @@ Page({
     let readCount = result.readCount
     let content = result.content
     let contentList = []
-    for (let i = 0; i < content.length; i++) {
-      if (content[i].type === 'p') {
+    for (let i = 0; i < content.length; i++) {  //根据api所给的信息，较好地设置新闻详情内容的布局，但由于api里面的content并不统一，图片后的一段文字应该是对图片的说明，然而有些新闻是这样，但另外的并不是，这点仍未解决
+      if (content[i].type === 'p') { 
         contentList.push({
           text: content[i].text
         })
