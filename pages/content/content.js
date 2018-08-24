@@ -61,15 +61,18 @@ Page({
         contentList.push({
           textStrong: content[i].text
         })
-      }      
+      }
       if (content[i].type === 'image') {
         contentList.push({
           image: content[i].src
         })
-        i++;
-        contentList.push({
-          remark: content[i].text
-        })        
+        if (i < content.length - 1) {
+          i++;
+          contentList.push({
+            remark: content[i].text
+          })
+        }
+
       }
     }
     this.setData({
