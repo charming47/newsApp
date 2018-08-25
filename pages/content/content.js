@@ -7,7 +7,8 @@ Page({
     time: '',
     readCount: '',
     content: '',
-    contentList: []
+    contentList: [],
+    failImage: ""
   },
 
   /**
@@ -39,7 +40,13 @@ Page({
         let result = res.data.result
         console.log(result.content)
         this.setContent(result)
-      }
+      },
+      fail: err => {  //获取失败
+        let failImage = "/images/404.png"
+        this.setData({
+          failImage: failImage
+        })
+      },
     })
   },
 
@@ -48,7 +55,8 @@ Page({
     console.log('setContent')
     let title = result.title
     let source = (result.source === "") ? "快读原创" : result.source
-    let time = (result.date).substring(11, 16)
+    let timeTemp = result.date
+    let time = timeTemp.substring(5, 7) + "月" + timeTemp.substring(8, 10) + "日 " + timeTemp.substring(11, 16)
     let readCount = result.readCount
     let content = result.content
     let contentList = []

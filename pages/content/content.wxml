@@ -1,4 +1,5 @@
 <!--pages/content/content.wxml-->
+<image class="fail-image" wx:if="{{failImage}}" src="{{failImage}}"></image>
 <view class="news-title">{{title}}</view>
 <view class="news-info">
   <view class="news-source">{{source}}</view>

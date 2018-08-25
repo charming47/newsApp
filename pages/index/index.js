@@ -16,11 +16,12 @@ Page({
     currentTab: 0,
     type: "gn",
     newsList: [],
-    headlineTitle:"",
-    headlineSource:"",
-    headlineTime:"",
-    headlineImagePath:"",
-    headlineId: 0
+    headlineTitle: "",
+    headlineSource: "",
+    headlineTime: "",
+    headlineImagePath: "",
+    headlineId: 0,
+    failImage: ""
   },
 
   onLoad() {
@@ -34,7 +35,7 @@ Page({
       wx.stopPullDownRefresh()
     })
   },
-// 获取新闻
+  // 获取新闻
   getNews(callback) {
     console.log('getNews')
     wx.request({
@@ -47,6 +48,12 @@ Page({
         console.log(result)
         this.setNewsList(result)
       },
+      fail: err => {  //获取失败
+        let failImage = "/images/404.png"
+        this.setData({
+          failImage: failImage
+        })
+      },
       complete: () => {
         callback && callback()
       }
@@ -54,7 +61,7 @@ Page({
   },
 
   // 导航切换监听  
-  navbarTap: function (e) {
+  navbarTap: function(e) {
     var currentTab = e.currentTarget.dataset.idx
     console.log(e)
     this.setData({
@@ -64,25 +71,26 @@ Page({
     this.getNews()
   },
 
-  
-// 设置渲染的新闻列表数据
+
+  // 设置渲染的新闻列表数据
   setNewsList(result) {
     console.log('setNewsList')
     let newsList = []
-    for(let i = 1; i < result.length; i++){
-        newsList.push({
-          title: result[i].title,
-          source: (result[i].source === "") ? "快读原创" : result[i].source,   //针对source为空的数据，默认为“快读原创”
-          date: (result[i].date).substring(11,16),
-          imagePath: result[i].firstImage,
-          id: result[i].id
-        })
+    for (let i = 1; i < result.length; i++) {
+      let dateTemp = (result[i].date)
+      newsList.push({
+        title: result[i].title,
+        source: (result[i].source === "") ? "快读原创" : result[i].source, //针对source为空的数据，默认为“快读原创”
+        date: dateTemp.substring(5, 7) + "月" + dateTemp.substring(8, 10) + "日 " + dateTemp.substring(11, 16), //完善显示日期功能
+        imagePath: (result[i].firstImage === "") ? "images/default.png" : result[i].firstImage,
+        id: result[i].id
+      })
     }
-    
+
     let headlineTitle = result[0].title
     let headlineSource = (result[0].source === "") ? "快读原创" : result[0].source
-    let headlineTime = (result[0].date).substring(11,16)
-    let headlineImagePath = result[0].firstImage
+    let headlineTime = (result[0].date).substring(11, 16)
+    let headlineImagePath = (result[0].firstImage === "") ? "images/default.png" : result[0].firstImage  //完善无响应情况下以默认图片代替的功能
     let headlineId = result[0].id
     this.setData({
       newsList: newsList,
@@ -94,10 +102,10 @@ Page({
     })
   },
 
-// 点击某条新闻，转入到新闻详情页，适用于头条下面的新闻列表
-  onTapNewsContent: function(e){
+  // 点击某条新闻，转入到新闻详情页，适用于头条下面的新闻列表
+  onTapNewsContent: function(e) {
     console.log('onTapNewsContent')
-    var index = e.currentTarget.dataset.idx 
+    var index = e.currentTarget.dataset.idx
     var id = this.data.newsList[index].id
     wx.navigateTo({
       url: '/pages/content/content?id=' + id
@@ -106,7 +114,7 @@ Page({
     console.log(id)
   },
 
-//点击头条新闻，转入到新闻详情页
+  //点击头条新闻，转入到新闻详情页
   onTapHeadlineContent() {
     console.log('onTapHeadlineContent')
     wx.navigateTo({
@@ -114,8 +122,3 @@ Page({
     })
   }
 })
-
-
-
-
-

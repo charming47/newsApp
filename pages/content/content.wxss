@@ -48,3 +48,8 @@
   padding-top: 30rpx;
   padding-bottom: 30rpx;
 }
+
+.fail-image{
+  width: 100%;
+  height: 100% !important;
+}

@@ -4,6 +4,7 @@
 </view>
 </view>
 
+<image class="fail-image" wx:if="{{failImage}}" src="{{failImage}}"></image>
 <!-- 点击标题才有效 -->
 <view class="headline-item" bindtap="onTapHeadlineContent">     
   <view class="headline-title">{{headlineTitle}}</view>
